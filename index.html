@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarohi Kurtis | Elegance in Every Thread</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            50: '#fdf2f4',
+                            100: '#fbe5e8',
+                            600: '#8c2434',
+                            700: '#6d1825',
+                            800: '#54121b',
+                            900: '#3d0a11',
+                        },
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#faf5ed',
+                            200: '#f3e8d7',
+                        },
+                        gold: {
+                            400: '#e5c05d',
+                            500: '#d4a337',
+                            600: '#b88523',
+                        },
+                        rose: {
+                            100: '#fbe4e1',
+                            200: '#f7c8c0',
+                            500: '#d9776f',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Reports -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF5ED;
+            color: #2D2325;
+        }
+        .font-heading { font-family: 'Cinzel', serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf5ed;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4a337;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d1825;
+        }
+
+        /* Printable Invoice Styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-invoice-modal, #printable-invoice-modal * {
+                visibility: visible;
+            }
+            #printable-invoice-modal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-gray-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Announcement Bar & Role Switcher -->
+    <div id="top-announcement-bar" class="bg-maroon-900 text-cream-100 text-xs py-2 px-4 transition-all">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="bg-gold-500 text-maroon-900 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Festive Offer</span>
+                <span>Get 15% Off with code <strong>FESTIVE15</strong> | Free Shipping across India on orders above ₹999</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+                <span class="hidden md:inline"><i class="fa-solid fa-phone mr-1"></i> +91 98765 43210</span>
+                <!-- Switch Portal Toggle Button -->
+                <button onclick="togglePortalMode()" class="bg-gold-500 hover:bg-gold-400 text-maroon-900 font-semibold px-3 py-1 rounded-full transition shadow flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    <span id="portal-switch-label">Switch to Admin & POS Dashboard</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Header -->
+    <header id="customer-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-cream-200 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileNav()" class="lg:hidden text-maroon-800 p-2 hover:bg-cream-100 rounded-lg">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+
+                <!-- Brand Logo -->
+                <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-full bg-maroon-700 flex items-center justify-center text-gold-400 font-heading text-2xl font-bold border-2 border-gold-400 shadow-md group-hover:scale-105 transition-transform">
+                        A
+                    </div>
+                    <div>
+                        <span class="font-heading text-xl sm:text-2xl font-bold text-maroon-800 tracking-wider block leading-none">AAROHI</span>
+                        <span class="text-[10px] tracking-[0.25em] text-gold-600 uppercase font-medium block">Kurtis & Ethnic</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-700">
+                    <a href="#" onclick="navigateTo('home'); return false;" class="hover:text-maroon-700 transition">Home</a>
+                    <a href="#" onclick="navigateTo('shop'); return false;" class="hover:text-maroon-700 transition">Shop All</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Anarkali Kurtis'); return false;" class="hover:text-maroon-700 transition">Anarkali</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Straight Kurtis'); return false;" class="hover:text-maroon-700 transition">Straight Kurtis</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Festive Kurtis'); return false;" class="hover:text-maroon-700 transition">Festive Collection</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('New Arrivals'); return false;" class="text-maroon-700 font-semibold hover:underline">New Arrivals</a>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Trigger -->
+                    <div class="relative hidden sm:block w-48 lg:w-64">
+                        <input type="text" id="header-search-input" onkeyup="handleHeaderSearch(event)" placeholder="Search Kurtis, Fabric..." class="w-full bg-cream-50 text-xs border border-cream-200 rounded-full pl-9 pr-4 py-2 focus:outline-none focus:border-maroon-600">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+                    </div>
+
+                    <!-- Search Icon Mobile -->
+                    <button onclick="openSearchModal()" class="sm:hidden text-gray-700 hover:text-maroon-700 p-2">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="navigateTo('account', 'wishlist')" class="relative text-gray-700 hover:text-maroon-700 p-2">
+                        <i class="fa-regular fa-heart text-xl"></i>
+                        <span id="wishlist-badge" class="absolute top-1 right-1 bg-gold-500 text-maroon-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Cart Drawer Trigger -->
+                    <button onclick="toggleCartDrawer(true)" class="relative text-gray-700 hover:text-maroon-700 p-2">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-badge" class="absolute top-1 right-1 bg-maroon-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Customer Account -->
+                    <button onclick="navigateTo('account')" class="flex items-center gap-2 text-gray-700 hover:text-maroon-700 p-2 border-l border-cream-200 pl-3">
+                        <i class="fa-regular fa-user text-xl"></i>
+                        <span id="user-display-name" class="hidden md:inline text-xs font-semibold text-gray-700">Account</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-nav-drawer" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity">
+        <div class="w-4/5 max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b">
+                    <span class="font-heading text-lg font-bold text-maroon-800">AAROHI KURTIS</span>
+                    <button onclick="toggleMobileNav()" class="text-gray-500 hover:text-gray-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="mt-6 flex flex-col space-y-4 font-medium text-sm">
+                    <a href="#" onclick="navigateTo('home'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Home</a>
+                    <a href="#" onclick="navigateTo('shop'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Shop All Products</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Anarkali Kurtis'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Anarkali Suits</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Straight Kurtis'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Straight Kurtis</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Embroidered Kurtis'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Embroidered Festive</a>
+                    <a href="#" onclick="filterCategoryAndNavigate('Rayon Kurtis'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">Rayon Daily Wear</a>
+                    <a href="#" onclick="navigateTo('account'); toggleMobileNav(); return false;" class="py-2 border-b border-gray-100">My Orders & Account</a>
+                </div>
+            </div>
+            <div class="pt-6 border-t border-gray-100 text-xs text-gray-500">
+                <p>Support: support@aarohikurtis.com</p>
+                <p>Call: +91 98765 43210</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main id="app-container" class="flex-grow">
+        <!-- Content will be injected here dynamically by JavaScript SPA router -->
+    </main>
+
+    <!-- Shopping Cart Drawer (Slide-over) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden transition-opacity">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-xs" onclick="toggleCartDrawer(false)"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-4 sm:p-6 bg-cream-100 border-b border-cream-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-maroon-700 text-xl"></i>
+                        <h2 class="font-heading text-lg font-bold text-maroon-900">Your Shopping Bag</h2>
+                        <span id="drawer-cart-count" class="bg-maroon-700 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+                    </div>
+                    <button onclick="toggleCartDrawer(false)" class="text-gray-500 hover:text-maroon-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Free Shipping Progress -->
+                <div class="bg-maroon-50 px-6 py-2.5 border-b border-maroon-100 text-xs text-maroon-800 flex items-center gap-2">
+                    <i class="fa-solid fa-truck-fast text-gold-600 text-sm"></i>
+                    <span id="free-shipping-msg">Add ₹999 more to get FREE Delivery!</span>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="drawer-cart-items" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+                    <!-- Dynamic cart items rendered here -->
+                </div>
+
+                <!-- Cart Footer -->
+                <div class="p-4 sm:p-6 bg-cream-50 border-t border-cream-200 space-y-3">
+                    <!-- Coupon Input -->
+                    <div class="flex gap-2">
+                        <input type="text" id="coupon-code-input" placeholder="Coupon Code (e.g. FESTIVE15)" class="flex-1 text-xs border border-gray-300 rounded-lg px-3 py-2 uppercase font-mono">
+                        <button onclick="applyCoupon()" class="bg-maroon-800 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-maroon-900">Apply</button>
+                    </div>
+                    <div id="applied-coupon-tag" class="hidden text-xs text-emerald-700 font-semibold flex items-center justify-between bg-emerald-50 p-2 rounded border border-emerald-200">
+                        <span><i class="fa-solid fa-ticket mr-1"></i> Coupon <span id="coupon-name">WELCOME10</span> Applied</span>
+                        <button onclick="removeCoupon()" class="text-red-500 hover:underline"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <!-- Pricing Breakdown -->
+                    <div class="text-xs space-y-1.5 text-gray-600 border-t pt-2 border-gray-200">
+                        <div class="flex justify-between"><span>Subtotal</span><span id="drawer-subtotal">₹0</span></div>
+                        <div class="flex justify-between text-emerald-600"><span>Product Discount</span><span id="drawer-discount">-₹0</span></div>
+                        <div class="flex justify-between text-emerald-600 hidden" id="coupon-row"><span>Coupon Discount</span><span id="drawer-coupon-discount">-₹0</span></div>
+                        <div class="flex justify-between"><span>Estimated GST (5%)</span><span id="drawer-tax">₹0</span></div>
+                        <div class="flex justify-between"><span>Shipping</span><span id="drawer-shipping" class="text-emerald-700 font-semibold">FREE</span></div>
+                        <div class="flex justify-between text-sm font-bold text-maroon-900 pt-2 border-t border-gray-300">
+                            <span>Grand Total</span>
+                            <span id="drawer-grand-total">₹0</span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Actions -->
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <button onclick="toggleCartDrawer(false); navigateTo('cart');" class="w-full py-2.5 px-4 bg-cream-200 hover:bg-cream-300 text-maroon-900 font-semibold rounded-lg text-xs transition">View Bag Details</button>
+                        <button onclick="toggleCartDrawer(false); navigateTo('checkout');" class="w-full py-2.5 px-4 bg-maroon-700 hover:bg-maroon-800 text-white font-semibold rounded-lg text-xs shadow-md transition">Proceed Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Quick View Modal -->
+    <div id="quick-view-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl z-10"><i class="fa-solid fa-xmark"></i></button>
+            <div id="quick-view-content" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Content dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal for Mobile & Instant Search -->
+    <div id="search-modal" class="fixed inset-0 z-50 hidden bg-black/60 p-4 pt-16">
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl p-4 shadow-2xl">
+            <div class="flex items-center gap-3 border-b pb-3">
+                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                <input type="text" id="modal-search-input" onkeyup="handleModalSearch(this.value)" placeholder="Search by name, category, fabric (e.g., Anarkali, Silk)..." class="flex-1 outline-none text-sm font-medium">
+                <button onclick="closeSearchModal()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div id="search-results-container" class="mt-4 max-h-96 overflow-y-auto space-y-3">
+                <p class="text-xs text-gray-400 text-center py-4">Start typing to explore our ethnic collection...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Footer -->
+    <footer id="customer-footer" class="bg-maroon-900 text-cream-100 pt-16 pb-8 border-t-4 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-maroon-800">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500 flex items-center justify-center text-maroon-900 font-heading text-xl font-bold">A</div>
+                        <span class="font-heading text-xl font-bold tracking-wider text-white">AAROHI KURTIS</span>
+                    </div>
+                    <p class="text-xs text-cream-200 leading-relaxed">
+                        Aarohi Kurtis brings you the finest handcrafted Indian ethnic wear. Elegant silhouettes, breathable fabrics, and vibrant embroidery designed for the modern Indian woman.
+                    </p>
+                    <div class="flex space-x-3 text-gold-400 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full border border-maroon-700 flex items-center justify-center hover:bg-gold-500 hover:text-maroon-900 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-maroon-700 flex items-center justify-center hover:bg-gold-500 hover:text-maroon-900 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-maroon-700 flex items-center justify-center hover:bg-gold-500 hover:text-maroon-900 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Shop Collections</h4>
+                    <ul class="space-y-2 text-xs text-cream-200">
+                        <li><a href="#" onclick="filterCategoryAndNavigate('Anarkali Kurtis'); return false;" class="hover:text-gold-400 transition">Anarkali Kurtis</a></li>
+                        <li><a href="#" onclick="filterCategoryAndNavigate('Straight Kurtis'); return false;" class="hover:text-gold-400 transition">Straight Everyday Kurtis</a></li>
+                        <li><a href="#" onclick="filterCategoryAndNavigate('Chanderi Kurtis'); return false;" class="hover:text-gold-400 transition">Chanderi Festive Wear</a></li>
+                        <li><a href="#" onclick="filterCategoryAndNavigate('Rayon Kurtis'); return false;" class="hover:text-gold-400 transition">Comfortable Rayon Sets</a></li>
+                        <li><a href="#" onclick="filterCategoryAndNavigate('Embroidered Kurtis'); return false;" class="hover:text-gold-400 transition">Hand embroidered Kurtis</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-xs text-cream-200">
+                        <li><a href="#" onclick="navigateTo('account', 'orders'); return false;" class="hover:text-gold-400 transition">Track Your Order</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">Shipping & Delivery Policy</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">Return & Exchange Request</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">Size Guide & Care Instructions</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition">Terms of Service & Privacy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-heading text-sm font-semibold text-gold-400 tracking-wider uppercase mb-4">Join Our Ethnic Club</h4>
+                    <p class="text-xs text-cream-200 mb-3">Subscribe to get secret festive offers and new arrival sneak peeks.</p>
+                    <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                        <input type="email" placeholder="Enter your email address" required class="w-full bg-maroon-800 text-xs border border-maroon-700 text-white placeholder-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gold-500">
+                        <button type="submit" class="w-full bg-gold-500 hover:bg-gold-400 text-maroon-900 font-bold text-xs py-2 rounded transition uppercase tracking-wider">Subscribe Now</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
+                <p>&copy; 2026 Aarohi Kurtis Pvt. Ltd. All Rights Reserved. Crafted for Ethnic Perfection.</p>
+                <div class="flex items-center space-x-4 text-lg text-cream-200">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-solid fa-building-columns" title="Net Banking"></i>
+                    <i class="fa-solid fa-qrcode" title="UPI Enabled"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Modern Single Page Application JS Engine for Aarohi Kurtis */
+
+        // Seed Product Catalog (24 realistic Ethnic Kurtis)
+        const DEFAULT_PRODUCTS = [
+            {
+                id: 'ARK-101',
+                name: 'Gulmohar Printed Anarkali Kurti',
+                sku: 'AK-ANR-001',
+                barcode: '890123456701',
+                categories: ['Anarkali Kurtis', 'Printed Kurtis', 'Festive Kurtis', 'New Arrivals'],
+                price: 2499,
+                discountPrice: 1699,
+                discountPercent: 32,
+                rating: 4.8,
+                reviewCount: 128,
+                fabric: 'Rayon Silk',
+                color: 'Dusty Rose',
+                availableSizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                sleeve: '3/4th Sleeves',
+                neck: 'Round Neck with Gota Patti',
+                length: 'Ankle Length (48 in)',
+                pattern: 'Floral Floral Block Print',
+                occasion: 'Festive Wear',
+                washCare: 'Dry Clean Only',
+                stock: 24,
+                minStock: 5,
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Elevate your festive flair with this handcrafted Anarkali kurti featuring traditional floral motifs, vibrant zari piping, and soft flowing rayon slub fabric.',
+                isFeatured: true,
+                isBestSeller: true,
+                isNewArrival: true
+            },
+            {
+                id: 'ARK-102',
+                name: 'Royal Chanderi Gold Embroidered Kurti Set',
+                sku: 'AK-CHN-002',
+                barcode: '890123456702',
+                categories: ['Chanderi Kurtis', 'Embroidered Kurtis', 'Festive Kurtis', 'Best Sellers'],
+                price: 3999,
+                discountPrice: 2899,
+                discountPercent: 27,
+                rating: 4.9,
+                reviewCount: 210,
+                fabric: 'Chanderi Cotton',
+                color: 'Beige & Gold',
+                availableSizes: ['M', 'L', 'XL'],
+                sleeve: 'Full Sleeves',
+                neck: 'V-Neck with Zardozi Work',
+                length: 'Calf Length (44 in)',
+                pattern: 'Zari Embroidery',
+                occasion: 'Party Wear',
+                washCare: 'Gentle Hand Wash',
+                stock: 8,
+                minStock: 10,
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Exquisite Chanderi cotton kurti crafted with authentic zari embroidery along the yoke and hemline. Perfect for wedding sangeet and family celebrations.',
+                isFeatured: true,
+                isBestSeller: true,
+                isNewArrival: false
+            },
+            {
+                id: 'ARK-103',
+                name: 'Kashmiri A-Line Daily Cotton Kurti',
+                sku: 'AK-COT-003',
+                barcode: '890123456703',
+                categories: ['A-Line Kurtis', 'Cotton Kurtis', 'Office Wear', 'Casual Wear'],
+                price: 1499,
+                discountPrice: 999,
+                discountPercent: 33,
+                rating: 4.5,
+                reviewCount: 84,
+                fabric: '100% Pure Cotton',
+                color: 'Ivory Cream',
+                availableSizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                sleeve: '3/4th Sleeves',
+                neck: 'Mandarin Collar',
+                length: 'Knee Length (42 in)',
+                pattern: 'Kashmiri Resham Threadwork',
+                occasion: 'Office Wear',
+                washCare: 'Machine Wash Soft',
+                stock: 45,
+                minStock: 8,
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Stay elegant and comfortable all day in office with this breathable 100% pure cotton A-line kurti with sophisticated thread accents.',
+                isFeatured: false,
+                isBestSeller: false,
+                isNewArrival: true
+            },
+            {
+                id: 'ARK-104',
+                name: 'Emerald Green Straight Rayon Kurti',
+                sku: 'AK-STR-004',
+                barcode: '890123456704',
+                categories: ['Straight Kurtis', 'Rayon Kurtis', 'Office Wear', 'Casual Wear'],
+                price: 1299,
+                discountPrice: 849,
+                discountPercent: 34,
+                rating: 4.6,
+                reviewCount: 96,
+                fabric: 'Premium Rayon Slub',
+                color: 'Emerald Green',
+                availableSizes: ['S', 'M', 'L', 'XL'],
+                sleeve: '3/4th Sleeves',
+                neck: 'Round Neck with Keyhole',
+                length: 'Straight Long (45 in)',
+                pattern: 'Solid with Button Accents',
+                occasion: 'Casual Wear',
+                washCare: 'Hand Wash',
+                stock: 3,
+                minStock: 5, // Low stock demo!
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1596783030842-230f6556e877?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1596783030842-230f6556e877?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Versatile straight fit rayon kurti designed with minimal aesthetics. Ideal for casual day outs and routine office wear.',
+                isFeatured: true,
+                isBestSeller: false,
+                isNewArrival: false
+            },
+            {
+                id: 'ARK-105',
+                name: 'Maroon Mirror Work Party Wear Kurti',
+                sku: 'AK-EMB-005',
+                barcode: '890123456705',
+                categories: ['Embroidered Kurtis', 'Party Wear', 'Festive Kurtis', 'Best Sellers'],
+                price: 2999,
+                discountPrice: 2199,
+                discountPercent: 26,
+                rating: 4.9,
+                reviewCount: 340,
+                fabric: 'Georgette Silk',
+                color: 'Deep Maroon',
+                availableSizes: ['M', 'L', 'XL', 'XXL'],
+                sleeve: 'Full Designer Sleeves',
+                neck: 'Sweetheart Neckline',
+                length: 'Flared Floor Length (52 in)',
+                pattern: 'Foil Mirror Embroidery',
+                occasion: 'Party Wear',
+                washCare: 'Dry Clean Only',
+                stock: 18,
+                minStock: 5,
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Shine in every celebration with this heavy mirror embroidered deep maroon Georgette kurti equipped with soft inner lining.',
+                isFeatured: true,
+                isBestSeller: true,
+                isNewArrival: false
+            },
+            {
+                id: 'ARK-106',
+                name: 'Jaipuri Indigo Block Print Cotton Kurti',
+                sku: 'AK-PRI-006',
+                barcode: '890123456706',
+                categories: ['Printed Kurtis', 'Cotton Kurtis', 'Casual Wear'],
+                price: 1599,
+                discountPrice: 1099,
+                discountPercent: 31,
+                rating: 4.7,
+                reviewCount: 112,
+                fabric: 'Pure Organic Cotton',
+                color: 'Indigo Blue',
+                availableSizes: ['S', 'M', 'L', 'XL'],
+                sleeve: 'Elbow Length',
+                neck: 'Boat Neck',
+                length: 'Calf Length (44 in)',
+                pattern: 'Jaipuri Hand Block Print',
+                occasion: 'Casual Wear',
+                washCare: 'Cold Water Wash',
+                stock: 30,
+                minStock: 5,
+                taxPercent: 5,
+                image: 'https://images.unsplash.com/photo-1583391733975-ac28ee1a260f?auto=format&fit=crop&q=80&w=800',
+                gallery: [
+                    'https://images.unsplash.com/photo-1583391733975-ac28ee1a260f?auto=format&fit=crop&q=80&w=800'
+                ],
+                description: 'Authentic Bagru & Indigo hand block printed straight kurti from Jaipur. Ultra breathable for warm summer days.',
+                isFeatured: false,
+                isBestSeller: true,
+                isNewArrival: true
+            }
+        ];
+
+        // Seed Sample Orders
+        const DEFAULT_ORDERS = [
+            {
+                id: 'ARK-ORD-9841',
+                customerName: 'Priya Sharma',
+                customerPhone: '+91 98765 12345',
+                customerEmail: 'priya@example.com',
+                address: 'Flat 402, Royal Palms, MG Road, Bengaluru, Karnataka - 560001',
+                date: '2026-10-05',
+                items: [
+                    { productId: 'ARK-101', name: 'Gulmohar Printed Anarkali Kurti', size: 'M', color: 'Dusty Rose', price: 1699, qty: 1 }
+                ],
+                subtotal: 1699,
+                discount: 0,
+                tax: 85,
+                grandTotal: 1784,
+                paymentMethod: 'UPI',
+                paymentStatus: 'Paid',
+                orderStatus: 'Delivered',
+                isPos: false
+            },
+            {
+                id: 'ARK-POS-1002',
+                customerName: 'Walk-in Customer',
+                customerPhone: '+91 99887 76655',
+                customerEmail: 'walkin@aarohikurtis.com',
+                address: 'In-Store Retail Purchase (Store #01)',
+                date: '2026-10-07',
+                items: [
+                    { productId: 'ARK-102', name: 'Royal Chanderi Gold Embroidered Kurti Set', size: 'L', color: 'Beige & Gold', price: 2899, qty: 1 }
+                ],
+                subtotal: 2899,
+                discount: 200,
+                tax: 135,
+                grandTotal: 2834,
+                paymentMethod: 'Cash',
+                paymentStatus: 'Paid',
+                orderStatus: 'Delivered',
+                isPos: true
+            }
+        ];
+
+        // Seed Coupons
+        const DEFAULT_COUPONS = [
+            { code: 'WELCOME10', discountType: 'percentage', discountValue: 10, minOrder: 500, maxDiscount: 300, active: true },
+            { code: 'FESTIVE15', discountType: 'percentage', discountValue: 15, minOrder: 1500, maxDiscount: 800, active: true },
+            { code: 'FLAT500', discountType: 'fixed', discountValue: 500, minOrder: 3000, maxDiscount: 500, active: true }
+        ];
+
+        // App Central State
+        let state = {
+            mode: 'customer', // 'customer' or 'admin'
+            currentView: 'home', // 'home', 'shop', 'product', 'cart', 'checkout', 'account', 'admin-dash', 'admin-pos', 'admin-products', 'admin-inventory', 'admin-orders', 'admin-customers', 'admin-returns', 'admin-coupons', 'admin-reports'
+            activeProductDetailId: null,
+            products: JSON.parse(localStorage.getItem('aarohi_products')) || DEFAULT_PRODUCTS,
+            cart: JSON.parse(localStorage.getItem('aarohi_cart')) || [],
+            wishlist: JSON.parse(localStorage.getItem('aarohi_wishlist')) || ['ARK-101', 'ARK-105'],
+            orders: JSON.parse(localStorage.getItem('aarohi_orders')) || DEFAULT_ORDERS,
+            coupons: JSON.parse(localStorage.getItem('aarohi_coupons')) || DEFAULT_COUPONS,
+            returns: JSON.parse(localStorage.getItem('aarohi_returns')) || [],
+            appliedCoupon: JSON.parse(localStorage.getItem('aarohi_applied_coupon')) || null,
+            recentlyViewed: JSON.parse(localStorage.getItem('aarohi_recent')) || ['ARK-102', 'ARK-104'],
+            user: {
+                name: 'Ananya Verma',
+                email: 'customer@aarohikurtis.com',
+                phone: '+91 98123 45678',
+                address: 'House No. 14, Lotus Colony, Park Street, Jaipur, Rajasthan - 302001'
+            },
+            filters: {
+                category: 'All',
+                fabric: 'All',
+                color: 'All',
+                occasion: 'All',
+                maxPrice: 5000,
+                sortBy: 'recommended',
+                searchQuery: ''
+            },
+            posCart: [],
+            posCustomer: { name: 'Walk-in Customer', phone: '+91 90000 00000' }
+        };
+
+        function saveState() {
+            localStorage.setItem('aarohi_products', JSON.stringify(state.products));
+            localStorage.setItem('aarohi_cart', JSON.stringify(state.cart));
+            localStorage.setItem('aarohi_wishlist', JSON.stringify(state.wishlist));
+            localStorage.setItem('aarohi_orders', JSON.stringify(state.orders));
+            localStorage.setItem('aarohi_coupons', JSON.stringify(state.coupons));
+            localStorage.setItem('aarohi_returns', JSON.stringify(state.returns));
+            localStorage.setItem('aarohi_applied_coupon', JSON.stringify(state.appliedCoupon));
+            localStorage.setItem('aarohi_recent', JSON.stringify(state.recentlyViewed));
+            updateBadges();
+        }
+
+        function formatINR(amount) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-maroon-800' : type === 'error' ? 'bg-red-600' : 'bg-gold-600';
+            toast.className = `fixed bottom-6 right-6 ${bgColor} text-white text-xs font-semibold px-4 py-3 rounded-lg shadow-2xl z-50 flex items-center gap-2 transition-all transform translate-y-2 opacity-0`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check text-gold-400' : 'fa-circle-exclamation'}"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function togglePortalMode() {
+            if (state.mode === 'customer') {
+                state.mode = 'admin';
+                state.currentView = 'admin-dash';
+                document.getElementById('portal-switch-label').innerText = 'Switch to Customer Storefront';
+                document.getElementById('customer-header').classList.add('hidden');
+                document.getElementById('customer-footer').classList.add('hidden');
+            } else {
+                state.mode = 'customer';
+                state.currentView = 'home';
+                document.getElementById('portal-switch-label').innerText = 'Switch to Admin & POS Dashboard';
+                document.getElementById('customer-header').classList.remove('hidden');
+                document.getElementById('customer-footer').classList.remove('hidden');
+            }
+            renderApp();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateTo(view, subSection = null) {
+            state.currentView = view;
+            if (view === 'product') {
+                // Keep active product
+            }
+            renderApp();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (subSection && view === 'account') {
+                setTimeout(() => {
+                    const el = document.getElementById(`acc-tab-${subSection}`);
+                    if (el) el.click();
+                }, 100);
+            }
+        }
+
+        function filterCategoryAndNavigate(catName) {
+            state.filters.category = catName;
+            navigateTo('shop');
+        }
+
+        function toggleMobileNav() {
+            const drawer = document.getElementById('mobile-nav-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                renderCartDrawer();
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function updateBadges() {
+            const cartTotalQty = state.cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = cartTotalQty;
+            document.getElementById('drawer-cart-count').innerText = cartTotalQty;
+            document.getElementById('wishlist-badge').innerText = state.wishlist.length;
+        }
+
+        function addToCart(productId, size = 'M', color = null, qty = 1) {
+            const prod = state.products.find(p => p.id === productId);
+            if (!prod) return;
+
+            const targetColor = color || prod.color;
+            const existingIndex = state.cart.findIndex(item => item.id === productId && item.size === size && item.color === targetColor);
+
+            if (existingIndex > -1) {
+                state.cart[existingIndex].qty += qty;
+            } else {
+                state.cart.push({
+                    id: productId,
+                    name: prod.name,
+                    price: prod.discountPrice,
+                    originalPrice: prod.price,
+                    image: prod.image,
+                    size: size,
+                    color: targetColor,
+                    qty: qty
+                });
+            }
+            saveState();
+            showToast(`Added "${prod.name}" (${size}) to Shopping Bag!`);
+            toggleCartDrawer(true);
+        }
+
+        function updateCartQty(index, newQty) {
+            if (newQty <= 0) {
+                state.cart.splice(index, 1);
+            } else {
+                state.cart[index].qty = newQty;
+            }
+            saveState();
+            renderCartDrawer();
+            if (state.currentView === 'cart') renderApp();
+        }
+
+        function toggleWishlist(productId) {
+            const idx = state.wishlist.indexOf(productId);
+            if (idx > -1) {
+                state.wishlist.splice(idx, 1);
+                showToast('Removed item from Wishlist', 'info');
+            } else {
+                state.wishlist.push(productId);
+                showToast('Saved item to your Wishlist!');
+            }
+            saveState();
+            renderApp();
+        }
+
+        function applyCoupon() {
+            const codeInput = document.getElementById('coupon-code-input');
+            const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+            if (!code) return;
+
+            const found = state.coupons.find(c => c.code === code && c.active);
+            if (!found) {
+                showToast('Invalid or expired coupon code', 'error');
+                return;
+            }
+
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            if (subtotal < found.minOrder) {
+                showToast(`Minimum order value for ${code} is ${formatINR(found.minOrder)}`, 'error');
+                return;
+            }
+
+            state.appliedCoupon = found;
+            saveState();
+            showToast(`Coupon ${code} applied successfully!`);
+            renderCartDrawer();
+            if (state.currentView === 'cart' || state.currentView === 'checkout') renderApp();
+        }
+
+        function removeCoupon() {
+            state.appliedCoupon = null;
+            saveState();
+            showToast('Coupon removed');
+            renderCartDrawer();
+            if (state.currentView === 'cart' || state.currentView === 'checkout') renderApp();
+        }
+
+        function renderCartDrawer() {
+            const container = document.getElementById('drawer-cart-items');
+            if (!container) return;
+
+            if (state.cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-cream-200"></i>
+                        <p class="text-sm font-semibold text-gray-500">Your shopping bag is empty</p>
+                        <button onclick="toggleCartDrawer(false); navigateTo('shop');" class="bg-maroon-800 text-white text-xs px-4 py-2 rounded-lg font-semibold hover:bg-maroon-900">Explore Collections</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = state.cart.map((item, index) => `
+                    <div class="flex gap-3 p-3 bg-cream-50 rounded-xl border border-cream-200 items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover rounded-lg border">
+                        <div class="flex-1 text-xs">
+                            <h4 class="font-bold text-gray-800 line-clamp-1">${item.name}</h4>
+                            <p class="text-gray-500 mt-0.5">Size: <span class="font-semibold text-maroon-800">${item.size}</span> | Color: ${item.color}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="font-bold text-maroon-900">${formatINR(item.price)}</span>
+                                <div class="flex items-center border border-gray-300 rounded bg-white">
+                                    <button onclick="updateCartQty(${index}, ${item.qty - 1})" class="px-2 py-0.5 text-gray-600 hover:bg-gray-100">-</button>
+                                    <span class="px-2 font-bold">${item.qty}</span>
+                                    <button onclick="updateCartQty(${index}, ${item.qty + 1})" class="px-2 py-0.5 text-gray-600 hover:bg-gray-100">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="updateCartQty(${index}, 0)" class="text-gray-400 hover:text-red-600 text-sm p-1"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                `).join('');
+            }
+
+            // Price Calculations
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const rawSubtotal = state.cart.reduce((sum, item) => sum + (item.originalPrice * item.qty), 0);
+            const productDiscount = rawSubtotal - subtotal;
+
+            let couponDiscount = 0;
+            if (state.appliedCoupon && subtotal >= state.appliedCoupon.minOrder) {
+                if (state.appliedCoupon.discountType === 'percentage') {
+                    couponDiscount = Math.min((subtotal * state.appliedCoupon.discountValue) / 100, state.appliedCoupon.maxDiscount);
+                } else {
+                    couponDiscount = state.appliedCoupon.discountValue;
+                }
+            }
+
+            const taxable = Math.max(0, subtotal - couponDiscount);
+            const tax = Math.round(taxable * 0.05);
+            const shipping = taxable >= 999 || state.cart.length === 0 ? 0 : 99;
+            const grandTotal = taxable + tax + shipping;
+
+            document.getElementById('drawer-subtotal').innerText = formatINR(subtotal);
+            document.getElementById('drawer-discount').innerText = `-${formatINR(productDiscount)}`;
+            document.getElementById('drawer-tax').innerText = formatINR(tax);
+            document.getElementById('drawer-shipping').innerText = shipping === 0 ? 'FREE' : formatINR(shipping);
+            document.getElementById('drawer-grand-total').innerText = formatINR(grandTotal);
+
+            const couponRow = document.getElementById('coupon-row');
+            const couponTag = document.getElementById('applied-coupon-tag');
+            if (state.appliedCoupon && couponDiscount > 0) {
+                couponRow.classList.remove('hidden');
+                document.getElementById('drawer-coupon-discount').innerText = `-${formatINR(couponDiscount)}`;
+                if (couponTag) {
+                    couponTag.classList.remove('hidden');
+                    document.getElementById('coupon-name').innerText = state.appliedCoupon.code;
+                }
+            } else if (couponRow && couponTag) {
+                couponRow.classList.add('hidden');
+                couponTag.classList.add('hidden');
+            }
+
+            const freeShipMsg = document.getElementById('free-shipping-msg');
+            if (freeShipMsg) {
+                if (subtotal >= 999) {
+                    freeShipMsg.innerHTML = '<span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check"></i> You unlocked FREE Express Delivery!</span>';
+                } else {
+                    freeShipMsg.innerText = `Add ${formatINR(999 - subtotal)} more to get FREE Delivery!`;
+                }
+            }
+        }
+
+        function renderApp() {
+            const container = document.getElementById('app-container');
+            if (!container) return;
+
+            // Customer Views
+            if (state.mode === 'customer') {
+                switch (state.currentView) {
+                    case 'home':
+                        container.innerHTML = renderHomePage();
+                        break;
+                    case 'shop':
+                        container.innerHTML = renderShopPage();
+                        break;
+                    case 'product':
+                        container.innerHTML = renderProductDetailPage();
+                        break;
+                    case 'cart':
+                        container.innerHTML = renderCartPage();
+                        break;
+                    case 'checkout':
+                        container.innerHTML = renderCheckoutPage();
+                        break;
+                    case 'account':
+                        container.innerHTML = renderAccountPage();
+                        break;
+                    default:
+                        container.innerHTML = renderHomePage();
+                }
+            } else {
+                // Admin Portal Layout
+                container.innerHTML = `
+                    <div class="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+                        <!-- Sidebar -->
+                        <aside class="w-full md:w-64 bg-maroon-900 text-cream-100 flex-shrink-0 border-r border-maroon-800">
+                            <div class="p-5 border-b border-maroon-800 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded bg-gold-500 text-maroon-900 font-bold flex items-center justify-center font-heading">A</div>
+                                    <span class="font-heading font-bold text-lg text-white">AAROHI POS</span>
+                                </div>
+                                <span class="text-[10px] bg-gold-500/20 text-gold-400 border border-gold-500/30 px-2 py-0.5 rounded font-mono">v2.4</span>
+                            </div>
+                            <nav class="p-4 space-y-1 text-xs font-medium">
+                                <button onclick="state.currentView='admin-dash'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-dash'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-chart-line w-4"></i> Dashboard
+                                </button>
+                                <button onclick="state.currentView='admin-pos'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-pos'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-cash-register w-4"></i> Retail POS Billing
+                                </button>
+                                <button onclick="state.currentView='admin-products'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-products'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-shirt w-4"></i> Products Catalog
+                                </button>
+                                <button onclick="state.currentView='admin-inventory'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-inventory'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-boxes-stacked w-4"></i> Inventory Stock
+                                </button>
+                                <button onclick="state.currentView='admin-orders'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-orders'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-truck-ramp-box w-4"></i> Orders Management
+                                </button>
+                                <button onclick="state.currentView='admin-customers'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-customers'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-users w-4"></i> Customers
+                                </button>
+                                <button onclick="state.currentView='admin-returns'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-returns'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-rotate-left w-4"></i> Returns & Refunds
+                                </button>
+                                <button onclick="state.currentView='admin-coupons'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-coupons'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-ticket w-4"></i> Coupon Manager
+                                </button>
+                                <button onclick="state.currentView='admin-reports'; renderApp();" class="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition ${state.currentView==='admin-reports'?'bg-gold-500 text-maroon-900 font-bold':'hover:bg-maroon-800 text-cream-200'}">
+                                    <i class="fa-solid fa-file-invoice-dollar w-4"></i> Reports & Analytics
+                                </button>
+                            </nav>
+                            <div class="p-4 border-t border-maroon-800">
+                                <button onclick="togglePortalMode()" class="w-full py-2 bg-maroon-800 hover:bg-maroon-700 text-gold-400 font-bold rounded-lg text-xs flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-store"></i> Back to Storefront
+                                </button>
+                            </div>
+                        </aside>
+
+                        <!-- Main Content Area -->
+                        <main class="flex-1 p-4 sm:p-8 overflow-y-auto">
+                            ${renderAdminView()}
+                        </main>
+                    </div>
+                `;
+            }
+
+            updateBadges();
+        }
+
+        function renderHomePage() {
+            const featuredList = state.products.filter(p => p.isFeatured).slice(0, 4);
+            const newArrivalsList = state.products.filter(p => p.isNewArrival).slice(0, 4);
+
+            return `
+                <!-- Hero Banner Section -->
+                <section class="relative bg-gradient-to-r from-maroon-900 via-maroon-800 to-maroon-950 text-white overflow-hidden py-16 lg:py-24">
+                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#d4a337_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6 text-center lg:text-left">
+                            <span class="inline-block bg-gold-500/20 border border-gold-400/40 text-gold-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest">
+                                Festive Festive Collection 2026
+                            </span>
+                            <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-wide text-cream-50">
+                                Elegance in Every Thread
+                            </h1>
+                            <p class="text-cream-200 text-sm sm:text-base font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                                Discover timeless Indian handcrafted Kurtis, flowing Anarkalis, and rich Chanderi ensembles tailored for your everyday and celebration wardrobes.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button onclick="navigateTo('shop')" class="bg-gold-500 hover:bg-gold-400 text-maroon-900 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 text-sm uppercase tracking-wider">
+                                    Shop Kurtis Now
+                                </button>
+                                <button onclick="filterCategoryAndNavigate('Festive Kurtis')" class="border-2 border-gold-400 hover:bg-gold-400/10 text-gold-300 font-semibold px-8 py-3.5 rounded-xl transition text-sm">
+                                    Explore Festive Line
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 relative">
+                            <div class="space-y-4">
+                                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=600" class="rounded-2xl shadow-2xl object-cover h-64 sm:h-80 w-full transform -rotate-2 hover:rotate-0 transition duration-500">
+                            </div>
+                            <div class="space-y-4 pt-8">
+                                <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600" class="rounded-2xl shadow-2xl object-cover h-64 sm:h-80 w-full transform rotate-2 hover:rotate-0 transition duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shop by Category Grid -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="text-center max-w-xl mx-auto mb-12">
+                        <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Curated Styles</span>
+                        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-maroon-900 mt-1">Shop By Category</h2>
+                        <div class="w-16 h-0.5 bg-gold-500 mx-auto mt-3"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        ${[
+                            { title: 'Anarkali Kurtis', img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=400' },
+                            { title: 'Straight Kurtis', img: 'https://images.unsplash.com/photo-1596783030842-230f6556e877?auto=format&fit=crop&q=80&w=400' },
+                            { title: 'A-Line Kurtis', img: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&q=80&w=400' },
+                            { title: 'Chanderi Kurtis', img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=400' },
+                            { title: 'Embroidered Kurtis', img: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&q=80&w=400' },
+                            { title: 'Printed Kurtis', img: 'https://images.unsplash.com/photo-1583391733975-ac28ee1a260f?auto=format&fit=crop&q=80&w=400' }
+                        ].map(cat => `
+                            <div onclick="filterCategoryAndNavigate('${cat.title}')" class="group cursor-pointer bg-white rounded-2xl p-3 shadow-sm hover:shadow-md transition text-center border border-cream-200">
+                                <div class="overflow-hidden rounded-xl h-36 mb-3">
+                                    <img src="${cat.img}" alt="${cat.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <h3 class="font-heading text-xs font-bold text-gray-800 group-hover:text-maroon-700">${cat.title}</h3>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+
+                <!-- Featured Products Section -->
+                <section class="bg-cream-100 py-16 border-y border-cream-200">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex flex-col sm:flex-row items-center justify-between mb-10 gap-4">
+                            <div>
+                                <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Editor's Pick</span>
+                                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-maroon-900">Featured Collections</h2>
+                            </div>
+                            <button onclick="navigateTo('shop')" class="text-maroon-800 font-bold text-xs hover:text-maroon-900 underline flex items-center gap-1">
+                                View Full Collection <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${featuredList.map(p => renderProductCardHTML(p)).join('')}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Customer Reviews Carousel Section -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="text-center max-w-xl mx-auto mb-12">
+                        <span class="text-gold-600 font-semibold text-xs tracking-widest uppercase">Customer Love</span>
+                        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-maroon-900 mt-1">What Women Say</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        ${[
+                            { name: 'Kavita Sundaram', city: 'Mumbai', text: 'The fabric quality of Gulmohar Anarkali is exceptional! Perfect stitching and comfortable fit for festive evenings.', rating: 5 },
+                            { name: 'Meera Deshmukh', city: 'Pune', text: 'Prompt delivery and immaculate packaging. The mirror embroidery on the Maroon Kurti looked so regal!', rating: 5 },
+                            { name: 'Sujata Nair', city: 'Bengaluru', text: 'Breathable pure cotton fabric that stays crisp even after multiple washes. Will definitely buy again!', rating: 5 }
+                        ].map(rev => `
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-cream-200 space-y-4">
+                                <div class="flex text-gold-500 text-xs">
+                                    ${Array(rev.rating).fill('<i class="fa-solid fa-star"></i>').join('')}
+                                </div>
+                                <p class="text-xs text-gray-600 italic leading-relaxed">"${rev.text}"</p>
+                                <div class="border-t pt-3 flex items-center justify-between text-xs">
+                                    <span class="font-bold text-maroon-900">${rev.name}</span>
+                                    <span class="text-gray-400">${rev.city}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderProductCardHTML(p) {
+            const isWish = state.wishlist.includes(p.id);
+            return `
+                <div class="bg-white rounded-2xl border border-cream-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div class="relative overflow-hidden">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500">
+                        
+                        <!-- Badges -->
+                        <div class="absolute top-3 left-3 flex flex-col gap-1">
+                            ${p.discountPercent > 0 ? `<span class="bg-maroon-800 text-gold-300 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow">${p.discountPercent}% OFF</span>` : ''}
+                            ${p.isBestSeller ? `<span class="bg-gold-500 text-maroon-900 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow">Best Seller</span>` : ''}
+                        </div>
+
+                        <!-- Quick Action Floating Buttons -->
+                        <div class="absolute top-3 right-3 flex flex-col gap-2">
+                            <button onclick="toggleWishlist('${p.id}')" class="w-8 h-8 rounded-full ${isWish ? 'bg-red-500 text-white' : 'bg-white/90 text-gray-700 hover:bg-white'} shadow flex items-center justify-center transition">
+                                <i class="${isWish ? 'fa-solid' : 'fa-regular'} fa-heart text-xs"></i>
+                            </button>
+                            <button onclick="openQuickView('${p.id}')" class="w-8 h-8 rounded-full bg-white/90 text-gray-700 hover:bg-white shadow flex items-center justify-center transition" title="Quick View">
+                                <i class="fa-regular fa-eye text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex items-center justify-between text-[11px] text-gray-500 mb-1">
+                                <span>${p.fabric}</span>
+                                <span class="text-gold-600 font-bold"><i class="fa-solid fa-star text-[10px]"></i> ${p.rating} (${p.reviewCount})</span>
+                            </div>
+                            <h3 class="font-heading text-sm font-bold text-gray-800 line-clamp-1 group-hover:text-maroon-700 transition cursor-pointer" onclick="openProductDetail('${p.id}')">
+                                ${p.name}
+                            </h3>
+                        </div>
+
+                        <div>
+                            <div class="flex items-baseline gap-2 mb-3">
+                                <span class="text-base font-bold text-maroon-900">${formatINR(p.discountPrice)}</span>
+                                <span class="text-xs text-gray-400 line-through">${formatINR(p.price)}</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="openProductDetail('${p.id}')" class="w-full py-2 bg-cream-200 hover:bg-cream-300 text-maroon-900 font-semibold rounded-lg text-xs transition">
+                                    Details
+                                </button>
+                                <button onclick="addToCart('${p.id}')" class="w-full py-2 bg-maroon-800 hover:bg-maroon-900 text-white font-semibold rounded-lg text-xs transition shadow flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-bag-shopping text-[10px]"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderShopPage() {
+            // Apply filtering logic
+            let filtered = state.products.filter(p => {
+                if (state.filters.category !== 'All' && !p.categories.includes(state.filters.category)) return false;
+                if (state.filters.fabric !== 'All' && p.fabric !== state.filters.fabric) return false;
+                if (state.filters.occasion !== 'All' && p.occasion !== state.filters.occasion) return false;
+                if (p.discountPrice > state.filters.maxPrice) return false;
+                if (state.filters.searchQuery) {
+                    const q = state.filters.searchQuery.toLowerCase();
+                    const match = p.name.toLowerCase().includes(q) || p.fabric.toLowerCase().includes(q) || p.categories.some(c => c.toLowerCase().includes(q));
+                    if (!match) return false;
+                }
+                return true;
+            });
+
+            // Sorting
+            if (state.filters.sortBy === 'price-low') filtered.sort((a,b) => a.discountPrice - b.discountPrice);
+            else if (state.filters.sortBy === 'price-high') filtered.sort((a,b) => b.discountPrice - a.discountPrice);
+            else if (state.filters.sortBy === 'rating') filtered.sort((a,b) => b.rating - a.rating);
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-6 border-b border-cream-200 gap-4">
+                        <div>
+                            <h1 class="font-heading text-2xl font-bold text-maroon-900">Kurti Collection</h1>
+                            <p class="text-xs text-gray-500 mt-1">Showing ${filtered.length} elegant Kurtis</p>
+                        </div>
+
+                        <!-- Sort & Mobile Filter Buttons -->
+                        <div class="flex items-center gap-3 w-full md:w-auto">
+                            <select onchange="state.filters.sortBy=this.value; renderApp();" class="text-xs border border-cream-300 rounded-lg px-3 py-2 bg-white text-gray-700 outline-none">
+                                <option value="recommended">Sort by: Recommended</option>
+                                <option value="price-low" ${state.filters.sortBy==='price-low'?'selected':''}>Price: Low to High</option>
+                                <option value="price-high" ${state.filters.sortBy==='price-high'?'selected':''}>Price: High to Low</option>
+                                <option value="rating" ${state.filters.sortBy==='rating'?'selected':''}>Best Rated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8">
+                        <!-- Sidebar Filters -->
+                        <div class="bg-white p-5 rounded-2xl border border-cream-200 space-y-6 h-fit">
+                            <div class="flex items-center justify-between border-b pb-3">
+                                <h3 class="font-bold text-xs uppercase tracking-wider text-maroon-900">Filter Products</h3>
+                                <button onclick="resetFilters()" class="text-[11px] text-maroon-700 hover:underline">Reset All</button>
+                            </div>
+
+                            <!-- Category Filter -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-2">Category</label>
+                                <select onchange="state.filters.category=this.value; renderApp();" class="w-full text-xs border border-gray-300 rounded-lg p-2 bg-cream-50">
+                                    <option value="All">All Categories</option>
+                                    <option value="Anarkali Kurtis">Anarkali Kurtis</option>
+                                    <option value="Straight Kurtis">Straight Kurtis</option>
+                                    <option value="A-Line Kurtis">A-Line Kurtis</option>
+                                    <option value="Printed Kurtis">Printed Kurtis</option>
+                                    <option value="Embroidered Kurtis">Embroidered Kurtis</option>
+                                    <option value="Chanderi Kurtis">Chanderi Kurtis</option>
+                                    <option value="Festive Kurtis">Festive Kurtis</option>
+                                    <option value="Office Wear">Office Wear</option>
+                                </select>
+                            </div>
+
+                            <!-- Max Price Range -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-gray-700 mb-2">
+                                    <span>Max Price</span>
+                                    <span>${formatINR(state.filters.maxPrice)}</span>
+                                </div>
+                                <input type="range" min="500" max="5000" step="200" value="${state.filters.maxPrice}" oninput="state.filters.maxPrice=parseInt(this.value); renderApp();" class="w-full accent-maroon-800">
+                            </div>
+
+                            <!-- Fabric Filter -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-2">Fabric Type</label>
+                                <select onchange="state.filters.fabric=this.value; renderApp();" class="w-full text-xs border border-gray-300 rounded-lg p-2 bg-cream-50">
+                                    <option value="All">All Fabrics</option>
+                                    <option value="Rayon Silk">Rayon Silk</option>
+                                    <option value="Chanderi Cotton">Chanderi Cotton</option>
+                                    <option value="100% Pure Cotton">100% Pure Cotton</option>
+                                    <option value="Georgette Silk">Georgette Silk</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <div class="lg:col-span-3">
+                            ${filtered.length === 0 ? `
+                                <div class="bg-white rounded-2xl p-12 text-center border border-cream-200">
+                                    <i class="fa-solid fa-shirt text-4xl text-cream-300 mb-3"></i>
+                                    <h3 class="font-heading font-bold text-lg text-gray-700">No Kurtis Match Your Criteria</h3>
+                                    <p class="text-xs text-gray-500 mt-1 mb-4">Try clearing some filters or searching for another fabric.</p>
+                                    <button onclick="resetFilters()" class="bg-maroon-800 text-white text-xs px-6 py-2.5 rounded-lg font-semibold">Reset Filters</button>
+                                </div>
+                            ` : `
+                                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    ${filtered.map(p => renderProductCardHTML(p)).join('')}
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetFilters() {
+            state.filters = { category: 'All', fabric: 'All', color: 'All', occasion: 'All', maxPrice: 5000, sortBy: 'recommended', searchQuery: '' };
+            renderApp();
+        }
+
+        function openProductDetail(productId) {
+            state.activeProductDetailId = productId;
+            if (!state.recentlyViewed.includes(productId)) {
+                state.recentlyViewed.unshift(productId);
+                state.recentlyViewed = state.recentlyViewed.slice(0, 5);
+                saveState();
+            }
+            navigateTo('product');
+        }
+
+        function renderProductDetailPage() {
+            const prod = state.products.find(p => p.id === state.activeProductDetailId) || state.products[0];
+            const isWish = state.wishlist.includes(prod.id);
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-6 sm:p-10 rounded-3xl border border-cream-200 shadow-sm">
+                        <!-- Image Gallery -->
+                        <div class="space-y-4">
+                            <div class="rounded-2xl overflow-hidden border border-cream-200 h-96 sm:h-[450px]">
+                                <img id="main-product-img" src="${prod.image}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex gap-3">
+                                ${prod.gallery.map(img => `
+                                    <img src="${img}" onclick="document.getElementById('main-product-img').src='${img}'" class="w-20 h-24 object-cover rounded-xl border border-cream-200 cursor-pointer hover:border-maroon-700 transition">
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Specs & Buy Column -->
+                        <div class="space-y-6">
+                            <div>
+                                <span class="text-xs font-bold text-gold-600 tracking-wider uppercase">${prod.fabric} • ${prod.occasion}</span>
+                                <h1 class="font-heading text-2xl sm:text-3xl font-bold text-maroon-900 mt-1">${prod.name}</h1>
+                                <div class="flex items-center gap-3 mt-2 text-xs">
+                                    <span class="bg-gold-500 text-maroon-900 font-bold px-2 py-0.5 rounded"><i class="fa-solid fa-star"></i> ${prod.rating}</span>
+                                    <span class="text-gray-500">${prod.reviewCount} customer reviews</span>
+                                    <span class="text-emerald-600 font-semibold">• ${prod.stock > 0 ? 'In Stock' : 'Out of Stock'}</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-cream-50 rounded-2xl border border-cream-200 flex items-baseline gap-3">
+                                <span class="text-2xl font-bold text-maroon-900">${formatINR(prod.discountPrice)}</span>
+                                <span class="text-sm text-gray-400 line-through">${formatINR(prod.price)}</span>
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">${prod.discountPercent}% OFF</span>
+                            </div>
+
+                            <p class="text-xs text-gray-600 leading-relaxed">${prod.description}</p>
+
+                            <!-- Size Selection -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs font-bold text-gray-800 mb-2">
+                                    <span>Select Size</span>
+                                    <button onclick="alert('Standard Indian Kurti Size Chart:\nS - Bust 36in\nM - Bust 38in\nL - Bust 40in\nXL - Bust 42in\nXXL - Bust 44in')" class="text-maroon-700 hover:underline">Size Chart</button>
+                                </div>
+                                <div class="flex gap-2">
+                                    ${prod.availableSizes.map((sz, idx) => `
+                                        <button onclick="selectDetailSize(this, '${sz}')" class="detail-size-btn border border-gray-300 ${idx===0?'border-maroon-800 bg-maroon-800 text-white':'hover:border-maroon-800'} w-10 h-10 rounded-xl font-bold text-xs transition">
+                                            ${sz}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Product Attributes Breakdown -->
+                            <div class="grid grid-cols-2 gap-3 text-xs bg-cream-50 p-4 rounded-xl border border-cream-200">
+                                <div><span class="text-gray-500">Pattern:</span> <span class="font-semibold">${prod.pattern}</span></div>
+                                <div><span class="text-gray-500">Sleeve:</span> <span class="font-semibold">${prod.sleeve}</span></div>
+                                <div><span class="text-gray-500">Neck Style:</span> <span class="font-semibold">${prod.neck}</span></div>
+                                <div><span class="text-gray-500">Length:</span> <span class="font-semibold">${prod.length}</span></div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <button onclick="addToCart('${prod.id}', selectedDetailSize)" class="py-3 bg-maroon-800 hover:bg-maroon-900 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-bag-shopping"></i> Add To Shopping Bag
+                                </button>
+                                <button onclick="addToCart('${prod.id}', selectedDetailSize); navigateTo('checkout');" class="py-3 bg-gold-500 hover:bg-gold-400 text-maroon-900 font-bold rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-bolt"></i> Buy Now Directly
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        let selectedDetailSize = 'M';
+        function selectDetailSize(btn, sz) {
+            document.querySelectorAll('.detail-size-btn').forEach(b => {
+                b.classList.remove('border-maroon-800', 'bg-maroon-800', 'text-white');
+            });
+            btn.classList.add('border-maroon-800', 'bg-maroon-800', 'text-white');
+            selectedDetailSize = sz;
+        }
+
+        function renderCheckoutPage() {
+            if (state.cart.length === 0) {
+                return `
+                    <div class="max-w-xl mx-auto py-20 text-center px-4">
+                        <i class="fa-solid fa-bag-shopping text-5xl text-cream-300 mb-4"></i>
+                        <h2 class="font-heading text-xl font-bold text-gray-800">Your Cart is Empty</h2>
+                        <p class="text-xs text-gray-500 mt-1 mb-6">Please add items to your shopping bag before proceeding to checkout.</p>
+                        <button onclick="navigateTo('shop')" class="bg-maroon-800 text-white font-bold text-xs px-6 py-3 rounded-xl">Shop Kurtis</button>
+                    </div>
+                `;
+            }
+
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let couponDiscount = 0;
+            if (state.appliedCoupon) {
+                couponDiscount = state.appliedCoupon.discountType === 'percentage' 
+                    ? Math.min((subtotal * state.appliedCoupon.discountValue) / 100, state.appliedCoupon.maxDiscount)
+                    : state.appliedCoupon.discountValue;
+            }
+            const taxable = Math.max(0, subtotal - couponDiscount);
+            const tax = Math.round(taxable * 0.05);
+            const shipping = taxable >= 999 ? 0 : 99;
+            const grandTotal = taxable + tax + shipping;
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <h1 class="font-heading text-2xl font-bold text-maroon-900 mb-8">Secure Checkout</h1>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Form Column -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <form id="checkout-form" onsubmit="processOrderPlacement(event)" class="space-y-6">
+                                <!-- Shipping Information -->
+                                <div class="bg-white p-6 rounded-2xl border border-cream-200 shadow-sm space-y-4">
+                                    <h3 class="font-heading text-sm font-bold text-maroon-900 uppercase tracking-wider border-b pb-2">1. Shipping Address</h3>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                                        <div>
+                                            <label class="block font-semibold text-gray-700 mb-1">Full Name</label>
+                                            <input type="text" required value="${state.user.name}" class="w-full border rounded-lg p-2.5 outline-none focus:border-maroon-700">
+                                        </div>
+                                        <div>
+                                            <label class="block font-semibold text-gray-700 mb-1">Phone Number</label>
+                                            <input type="tel" required value="${state.user.phone}" class="w-full border rounded-lg p-2.5 outline-none focus:border-maroon-700">
+                                        </div>
+                                        <div class="sm:col-span-2">
+                                            <label class="block font-semibold text-gray-700 mb-1">Delivery Address</label>
+                                            <textarea required class="w-full border rounded-lg p-2.5 outline-none focus:border-maroon-700">${state.user.address}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Selection -->
+                                <div class="bg-white p-6 rounded-2xl border border-cream-200 shadow-sm space-y-4">
+                                    <h3 class="font-heading text-sm font-bold text-maroon-900 uppercase tracking-wider border-b pb-2">2. Payment Method</h3>
+                                    <div class="space-y-3 text-xs">
+                                        <label class="flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-cream-50">
+                                            <input type="radio" name="paymentMethod" value="UPI" checked class="accent-maroon-800">
+                                            <div class="flex-1">
+                                                <span class="font-bold text-gray-800">UPI Instant Payment (Google Pay / PhonePe / Paytm)</span>
+                                                <p class="text-[11px] text-gray-400">Zero transaction fee</p>
+                                            </div>
+                                        </label>
+                                        <label class="flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-cream-50">
+                                            <input type="radio" name="paymentMethod" value="Card" class="accent-maroon-800">
+                                            <div>
+                                                <span class="font-bold text-gray-800">Credit / Debit Card</span>
+                                            </div>
+                                        </label>
+                                        <label class="flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-cream-50">
+                                            <input type="radio" name="paymentMethod" value="COD" class="accent-maroon-800">
+                                            <div>
+                                                <span class="font-bold text-gray-800">Cash on Delivery (COD)</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full py-4 bg-maroon-800 hover:bg-maroon-900 text-white font-bold rounded-2xl text-sm shadow-xl transition">
+                                    Place Order • ${formatINR(grandTotal)}
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Summary Column -->
+                        <div class="bg-white p-6 rounded-2xl border border-cream-200 shadow-sm space-y-4 h-fit">
+                            <h3 class="font-heading text-sm font-bold text-maroon-900 uppercase border-b pb-2">Order Summary</h3>
+                            <div class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                                ${state.cart.map(item => `
+                                    <div class="flex gap-3 text-xs border-b pb-2">
+                                        <img src="${item.image}" class="w-12 h-14 object-cover rounded">
+                                        <div class="flex-1">
+                                            <h4 class="font-bold line-clamp-1">${item.name}</h4>
+                                            <p class="text-gray-500">Qty: ${item.qty} | Size: ${item.size}</p>
+                                            <p class="font-bold text-maroon-800">${formatINR(item.price * item.qty)}</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="space-y-2 text-xs border-t pt-3">
+                                <div class="flex justify-between"><span>Subtotal</span><span>${formatINR(subtotal)}</span></div>
+                                ${couponDiscount > 0 ? `<div class="flex justify-between text-emerald-600"><span>Coupon Discount</span><span>-${formatINR(couponDiscount)}</span></div>` : ''}
+                                <div class="flex justify-between"><span>GST (5%)</span><span>${formatINR(tax)}</span></div>
+                                <div class="flex justify-between"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : formatINR(shipping)}</span></div>
+                                <div class="flex justify-between font-bold text-sm text-maroon-900 border-t pt-2"><span>Grand Total</span><span>${formatINR(grandTotal)}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function processOrderPlacement(e) {
+            e.preventDefault();
+            const payMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let couponDiscount = 0;
+            if (state.appliedCoupon) {
+                couponDiscount = state.appliedCoupon.discountType === 'percentage' 
+                    ? Math.min((subtotal * state.appliedCoupon.discountValue) / 100, state.appliedCoupon.maxDiscount)
+                    : state.appliedCoupon.discountValue;
+            }
+            const taxable = Math.max(0, subtotal - couponDiscount);
+            const tax = Math.round(taxable * 0.05);
+            const shipping = taxable >= 999 ? 0 : 99;
+            const grandTotal = taxable + tax + shipping;
+
+            const orderId = 'ARK-ORD-' + Math.floor(1000 + Math.random() * 9000);
+            const newOrder = {
+                id: orderId,
+                customerName: state.user.name,
+                customerPhone: state.user.phone,
+                customerEmail: state.user.email,
+                address: state.user.address,
+                date: new Date().toISOString().split('T')[0],
+                items: state.cart.map(i => ({ productId: i.id, name: i.name, size: i.size, color: i.color, price: i.price, qty: i.qty })),
+                subtotal: subtotal,
+                discount: couponDiscount,
+                tax: tax,
+                grandTotal: grandTotal,
+                paymentMethod: payMethod,
+                paymentStatus: payMethod === 'COD' ? 'Pending' : 'Paid',
+                orderStatus: 'Confirmed',
+                isPos: false
+            };
+
+            // Deduct stock
+            state.cart.forEach(cartItem => {
+                const prod = state.products.find(p => p.id === cartItem.id);
+                if (prod) prod.stock = Math.max(0, prod.stock - cartItem.qty);
+            });
+
+            state.orders.unshift(newOrder);
+            state.cart = [];
+            state.appliedCoupon = null;
+            saveState();
+
+            showToast(`Order ${orderId} placed successfully!`);
+            openInvoiceModal(newOrder);
+            navigateTo('account', 'orders');
+        }
+
+        function openInvoiceModal(order) {
+            const modal = document.createElement('div');
+            modal.id = 'printable-invoice-modal';
+            modal.className = 'fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto';
+            modal.innerHTML = `
+                <div class="bg-white p-8 rounded-2xl max-w-2xl w-full text-xs font-sans text-gray-800 shadow-2xl relative">
+                    <button onclick="this.closest('#printable-invoice-modal').remove()" class="no-print absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+
+                    <!-- Invoice Header -->
+                    <div class="flex justify-between items-start border-b pb-4 mb-4">
+                        <div>
+                            <h2 class="font-heading text-xl font-bold text-maroon-900">AAROHI KURTIS</h2>
+                            <p class="text-gray-500">Retail Store #01, Pink City Plaza, Jaipur, RJ</p>
+                            <p class="text-gray-500">GSTIN: 08AAAAA0000A1Z5 | Phone: +91 98765 43210</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-maroon-800 text-gold-300 font-bold px-3 py-1 rounded text-xs inline-block mb-1">TAX INVOICE</span>
+                            <p class="font-mono font-bold">${order.id}</p>
+                            <p class="text-gray-500">Date: ${order.date}</p>
+                        </div>
+                    </div>
+
+                    <!-- Customer Info -->
+                    <div class="bg-cream-50 p-3 rounded-lg border border-cream-200 mb-4 grid grid-cols-2 gap-2">
+                        <div>
+                            <span class="font-bold text-gray-700 block">Billed To:</span>
+                            <p class="font-semibold text-maroon-900">${order.customerName}</p>
+                            <p>${order.customerPhone}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-gray-700 block">Payment Details:</span>
+                            <p class="font-semibold text-emerald-700">${order.paymentMethod} (${order.paymentStatus})</p>
+                        </div>
+                    </div>
+
+                    <!-- Items Table -->
+                    <table class="w-full text-left border-collapse mb-4">
+                        <thead>
+                            <tr class="bg-maroon-900 text-white font-bold">
+                                <th class="p-2">Item Description</th>
+                                <th class="p-2">Size</th>
+                                <th class="p-2 text-center">Qty</th>
+                                <th class="p-2 text-right">Price</th>
+                                <th class="p-2 text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            ${order.items.map(item => `
+                                <tr>
+                                    <td class="p-2 font-medium">${item.name}</td>
+                                    <td class="p-2">${item.size}</td>
+                                    <td class="p-2 text-center">${item.qty}</td>
+                                    <td class="p-2 text-right">${formatINR(item.price)}</td>
+                                    <td class="p-2 text-right font-bold">${formatINR(item.price * item.qty)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+
+                    <!-- Totals Breakdown -->
+                    <div class="flex justify-end border-t pt-3">
+                        <div class="w-60 space-y-1 text-right">
+                            <div class="flex justify-between text-gray-600"><span>Subtotal:</span> <span>${formatINR(order.subtotal)}</span></div>
+                            ${order.discount > 0 ? `<div class="flex justify-between text-emerald-600"><span>Discount:</span> <span>-${formatINR(order.discount)}</span></div>` : ''}
+                            <div class="flex justify-between text-gray-600"><span>GST (5%):</span> <span>${formatINR(order.tax)}</span></div>
+                            <div class="flex justify-between font-bold text-sm text-maroon-900 border-t pt-1"><span>Grand Total:</span> <span>${formatINR(order.grandTotal)}</span></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center border-t pt-4 text-[10px] text-gray-400">
+                        <p class="font-semibold text-maroon-800">Thank you for shopping with Aarohi Kurtis!</p>
+                        <p>For return or exchange support, please email support@aarohikurtis.com</p>
+                    </div>
+
+                    <div class="no-print mt-6 flex justify-end gap-3">
+                        <button onclick="window.print()" class="bg-maroon-800 text-white px-5 py-2 rounded-lg font-bold hover:bg-maroon-900"><i class="fa-solid fa-print"></i> Print Invoice</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function renderAccountPage() {
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div class="bg-white p-6 rounded-2xl border border-cream-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-maroon-800 text-gold-400 font-heading text-2xl font-bold flex items-center justify-center">
+                                ${state.user.name.charAt(0)}
+                            </div>
+                            <div>
+                                <h2 class="font-heading text-xl font-bold text-maroon-900">${state.user.name}</h2>
+                                <p class="text-xs text-gray-500">${state.user.email} • ${state.user.phone}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                        <!-- Navigation Tabs -->
+                        <div class="space-y-2">
+                            <button id="acc-tab-orders" onclick="showAccountTab('orders')" class="w-full text-left p-3 rounded-xl font-bold text-xs bg-maroon-800 text-white">
+                                <i class="fa-solid fa-box mr-2"></i> My Order History (${state.orders.length})
+                            </button>
+                            <button id="acc-tab-wishlist" onclick="showAccountTab('wishlist')" class="w-full text-left p-3 rounded-xl font-bold text-xs bg-cream-100 hover:bg-cream-200 text-gray-800">
+                                <i class="fa-solid fa-heart mr-2 text-red-500"></i> Wishlist (${state.wishlist.length})
+                            </button>
+                        </div>
+
+                        <!-- Content Pane -->
+                        <div class="lg:col-span-3 bg-white p-6 rounded-2xl border border-cream-200">
+                            <div id="acc-pane-orders" class="space-y-4">
+                                <h3 class="font-heading text-base font-bold text-maroon-900 border-b pb-3">Your Past Orders</h3>
+                                ${state.orders.length === 0 ? '<p class="text-xs text-gray-400">No orders placed yet.</p>' : state.orders.map(o => `
+                                    <div class="border rounded-xl p-4 space-y-3 bg-cream-50">
+                                        <div class="flex justify-between items-center text-xs border-b pb-2">
+                                            <div>
+                                                <span class="font-bold text-maroon-900">${o.id}</span>
+                                                <span class="text-gray-400 ml-2">${o.date}</span>
+                                            </div>
+                                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[10px]">${o.orderStatus}</span>
+                                        </div>
+                                        <div class="space-y-1 text-xs">
+                                            ${o.items.map(i => `<p class="font-medium">• ${i.name} (${i.size}) x ${i.qty} - ${formatINR(i.price)}</p>`).join('')}
+                                        </div>
+                                        <div class="flex justify-between items-center pt-2 border-t text-xs">
+                                            <span class="font-bold text-maroon-900">Total: ${formatINR(o.grandTotal)}</span>
+                                            <button onclick='openInvoiceModal(${JSON.stringify(o)})' class="text-maroon-700 font-bold hover:underline"><i class="fa-solid fa-receipt"></i> View Invoice</button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div id="acc-pane-wishlist" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                ${state.wishlist.length === 0 ? '<p class="text-xs text-gray-400 col-span-2">Wishlist is empty.</p>' : state.wishlist.map(id => {
+                                    const p = state.products.find(x => x.id === id);
+                                    if (!p) return '';
+                                    return renderProductCardHTML(p);
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAccountTab(tab) {
+            document.getElementById('acc-pane-orders').classList.add('hidden');
+            document.getElementById('acc-pane-wishlist').classList.add('hidden');
+            document.getElementById(`acc-pane-${tab}`).classList.remove('hidden');
+        }
+
+        function renderAdminView() {
+            switch (state.currentView) {
+                case 'admin-dash':
+                    return renderAdminDashboard();
+                case 'admin-pos':
+                    return renderAdminPOSTerminal();
+                case 'admin-products':
+                    return renderAdminProducts();
+                case 'admin-inventory':
+                    return renderAdminInventory();
+                case 'admin-orders':
+                    return renderAdminOrders();
+                case 'admin-reports':
+                    return renderAdminReports();
+                default:
+                    return renderAdminDashboard();
+            }
+        }
+
+        function renderAdminDashboard() {
+            const todayRevenue = state.orders.reduce((sum, o) => sum + o.grandTotal, 0);
+            const lowStockCount = state.products.filter(p => p.stock <= p.minStock).length;
+
+            return `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="font-heading text-2xl font-bold text-maroon-900">Executive Retail Dashboard</h1>
+                        <button onclick="state.currentView='admin-pos'; renderApp();" class="bg-gold-500 hover:bg-gold-400 text-maroon-900 font-bold px-4 py-2 rounded-lg text-xs shadow"><i class="fa-solid fa-cash-register mr-1"></i> Open POS Billing</button>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-1">
+                            <span class="text-xs text-gray-500 font-bold uppercase">Total Revenue</span>
+                            <p class="text-2xl font-bold text-maroon-900">${formatINR(todayRevenue)}</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-1">
+                            <span class="text-xs text-gray-500 font-bold uppercase">Total Orders</span>
+                            <p class="text-2xl font-bold text-gray-800">${state.orders.length}</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-1">
+                            <span class="text-xs text-gray-500 font-bold uppercase">Active SKUs</span>
+                            <p class="text-2xl font-bold text-gray-800">${state.products.length}</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm space-y-1 border-l-4 border-l-red-500">
+                            <span class="text-xs text-gray-500 font-bold uppercase">Low Stock Alerts</span>
+                            <p class="text-2xl font-bold text-red-600">${lowStockCount}</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                        <h3 class="font-heading text-sm font-bold text-maroon-900 mb-4">Sales Analytics Overview</h3>
+                        <canvas id="dash-chart" class="w-full h-64"></canvas>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminPOSTerminal() {
+            const posSubtotal = state.posCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const posTax = Math.round(posSubtotal * 0.05);
+            const posGrandTotal = posSubtotal + posTax;
+
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+                    <!-- Products Search & Select Pane -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="pos-search-input" onkeyup="filterPOSProducts(this.value)" placeholder="Search SKU, Barcode, or Kurti Name..." class="flex-1 text-xs border border-gray-300 rounded-lg p-3 outline-none">
+                        </div>
+
+                        <div id="pos-product-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[500px] overflow-y-auto pr-1">
+                            ${state.products.map(p => `
+                                <div onclick="addToPOSCart('${p.id}')" class="p-3 border border-gray-200 rounded-xl hover:border-maroon-700 cursor-pointer bg-cream-50 space-y-1">
+                                    <img src="${p.image}" class="w-full h-24 object-cover rounded">
+                                    <h4 class="font-bold text-xs line-clamp-1">${p.name}</h4>
+                                    <p class="text-[10px] text-gray-500">SKU: ${p.sku} | Stock: ${p.stock}</p>
+                                    <p class="font-bold text-maroon-900 text-xs">${formatINR(p.discountPrice)}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- POS Billing Counter -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-heading text-sm font-bold text-maroon-900 border-b pb-2">Store Counter Receipt</h3>
+                            <div class="space-y-2 mt-4 max-h-60 overflow-y-auto">
+                                ${state.posCart.length === 0 ? '<p class="text-xs text-gray-400 py-6 text-center">No items added to bill counter</p>' : state.posCart.map((item, idx) => `
+                                    <div class="flex items-center justify-between text-xs border-b pb-2">
+                                        <div>
+                                            <h5 class="font-bold text-gray-800">${item.name}</h5>
+                                            <p class="text-gray-400">Qty: ${item.qty} x ${formatINR(item.price)}</p>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-bold text-maroon-900">${formatINR(item.price * item.qty)}</span>
+                                            <button onclick="state.posCart.splice(${idx},1); renderApp();" class="text-red-500"><i class="fa-solid fa-xmark"></i></button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 border-t pt-3 text-xs">
+                            <div class="flex justify-between"><span>Subtotal</span><span>${formatINR(posSubtotal)}</span></div>
+                            <div class="flex justify-between"><span>GST (5%)</span><span>${formatINR(posTax)}</span></div>
+                            <div class="flex justify-between text-sm font-bold text-maroon-900 border-t pt-2"><span>Grand Total</span><span>${formatINR(posGrandTotal)}</span></div>
+                            <button onclick="processPOSCheckout()" ${state.posCart.length === 0 ? 'disabled' : ''} class="w-full py-3 bg-maroon-800 hover:bg-maroon-900 disabled:bg-gray-300 text-white font-bold rounded-xl shadow-lg transition">
+                                Complete Sale & Print Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addToPOSCart(productId) {
+            const prod = state.products.find(p => p.id === productId);
+            if (!prod) return;
+            const existing = state.posCart.find(i => i.id === productId);
+            if (existing) existing.qty += 1;
+            else state.posCart.push({ id: prod.id, name: prod.name, price: prod.discountPrice, qty: 1, size: 'M', color: prod.color });
+            renderApp();
+        }
+
+        function processPOSCheckout() {
+            const posSubtotal = state.posCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const posTax = Math.round(posSubtotal * 0.05);
+            const posGrandTotal = posSubtotal + posTax;
+
+            const orderId = 'ARK-POS-' + Math.floor(1000 + Math.random() * 9000);
+            const posOrder = {
+                id: orderId,
+                customerName: 'Walk-In Customer',
+                customerPhone: '+91 90000 00000',
+                customerEmail: 'walkin@aarohikurtis.com',
+                address: 'Jaipur Store Counter #01',
+                date: new Date().toISOString().split('T')[0],
+                items: [...state.posCart],
+                subtotal: posSubtotal,
+                discount: 0,
+                tax: posTax,
+                grandTotal: posGrandTotal,
+                paymentMethod: 'Cash',
+                paymentStatus: 'Paid',
+                orderStatus: 'Delivered',
+                isPos: true
+            };
+
+            state.orders.unshift(posOrder);
+            state.posCart = [];
+            saveState();
+            showToast(`POS Billing ${orderId} completed!`);
+            openInvoiceModal(posOrder);
+            renderApp();
+        }
+
+        function renderAdminInventory() {
+            return `
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                    <h1 class="font-heading text-xl font-bold text-maroon-900">Inventory Stock & SKU Control</h1>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-cream-100 font-bold border-b border-cream-200">
+                                    <th class="p-3">SKU</th>
+                                    <th class="p-3">Product Name</th>
+                                    <th class="p-3">Category</th>
+                                    <th class="p-3">Unit Price</th>
+                                    <th class="p-3">Current Stock</th>
+                                    <th class="p-3">Stock Status</th>
+                                    <th class="p-3">Quick Adjust</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                ${state.products.map(p => {
+                                    const isLow = p.stock <= p.minStock;
+                                    return `
+                                        <tr class="${isLow ? 'bg-red-50/50' : ''}">
+                                            <td class="p-3 font-mono font-bold">${p.sku}</td>
+                                            <td class="p-3 font-semibold">${p.name}</td>
+                                            <td class="p-3">${p.categories[0]}</td>
+                                            <td class="p-3 font-bold">${formatINR(p.discountPrice)}</td>
+                                            <td class="p-3 font-bold ${isLow ? 'text-red-600' : 'text-gray-800'}">${p.stock}</td>
+                                            <td class="p-3">
+                                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isLow ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">
+                                                    ${isLow ? 'Low Stock' : 'Optimal'}
+                                                </span>
+                                            </td>
+                                            <td class="p-3 flex gap-1">
+                                                <button onclick="adjustStock('${p.id}', 5)" class="px-2 py-1 bg-cream-200 hover:bg-cream-300 rounded font-bold">+5</button>
+                                                <button onclick="adjustStock('${p.id}', -5)" class="px-2 py-1 bg-cream-200 hover:bg-cream-300 rounded font-bold">-5</button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function adjustStock(id, amount) {
+            const p = state.products.find(x => x.id === id);
+            if (p) {
+                p.stock = Math.max(0, p.stock + amount);
+                saveState();
+                renderApp();
+            }
+        }
+
+        function renderAdminProducts() {
+            return `
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h1 class="font-heading text-xl font-bold text-maroon-900">Products Catalog Management</h1>
+                        <button onclick="alert('Product addition modal demo feature')" class="bg-maroon-800 text-white text-xs px-4 py-2 rounded-lg font-bold"><i class="fa-solid fa-plus mr-1"></i> Add New Kurti SKU</button>
+                    </div>
+                    <p class="text-xs text-gray-500">Manage ${state.products.length} catalog items across all categories.</p>
+                </div>
+            `;
+        }
+
+        function renderAdminOrders() {
+            return `
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                    <h1 class="font-heading text-xl font-bold text-maroon-900">Orders Management</h1>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-cream-100 font-bold border-b">
+                                    <th class="p-3">Order ID</th>
+                                    <th class="p-3">Customer</th>
+                                    <th class="p-3">Date</th>
+                                    <th class="p-3">Amount</th>
+                                    <th class="p-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${state.orders.map(o => `
+                                    <tr class="border-b">
+                                        <td class="p-3 font-mono font-bold">${o.id}</td>
+                                        <td class="p-3">${o.customerName}</td>
+                                        <td class="p-3">${o.date}</td>
+                                        <td class="p-3 font-bold">${formatINR(o.grandTotal)}</td>
+                                        <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">${o.orderStatus}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminReports() {
+            return `
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+                    <h1 class="font-heading text-xl font-bold text-maroon-900">Reports & Analytics Export</h1>
+                    <p class="text-xs text-gray-500">Generate financial summaries and stock depletion logs.</p>
+                </div>
+            `;
+        }
+
+        window.onload = function() {
+            renderApp();
+            
+            // Initialize Chart.js if on admin dashboard
+            if (state.mode === 'admin') {
+                setTimeout(() => {
+                    const ctx = document.getElementById('dash-chart');
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                datasets: [{
+                                    label: 'Revenue (₹)',
+                                    data: [12000, 19000, 15000, 22000, 28000, 35000, 42000],
+                                    borderColor: '#6d1825',
+                                    backgroundColor: 'rgba(109, 24, 37, 0.1)',
+                                    fill: true
+                                }]
+                            }
+                        });
+                    }
+                }, 200);
+            }
+        };
+    </script>
+</body>
+</html>
